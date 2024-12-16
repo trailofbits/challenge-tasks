@@ -21,6 +21,8 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 
 ## Getting started with a new Coder instance
 
+[Link to Coder Docs](https://s.cdr.dev/docs/workspaces/ssh/)
+
 First, if you don't already have it, you'll need the Coder CLI binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
 ```shell-script
 brew install coder
@@ -34,3 +36,6 @@ Finally, you can ssh to your coder instance(s) using any of the names Coder adde
 ```shell-script
 ssh coder.<YOUR_INSTANCE_NAME_GOES_HERE>.main
 ```
+
+## Moving files to and fro
+`scp`, mysteriously enough, doesn't seem to want to play nicely with Coder configured with a startup script. Coder [officially supports the use of sFTP and rsync for file transfer](https://s.cdr.dev/docs/workspaces/ssh/).
