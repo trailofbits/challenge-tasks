@@ -31,3 +31,5 @@ Finally, you can ssh to your coder instance(s) using any of the names Coder adde
 ```shell-script
 ssh coder.<YOUR_INSTANCE_NAME_GOES_HERE>.main
 ```
+
+Coder should allow passwordless `sudo` on your instance, so once you've ssh'd in you should be able to add, install, change, etc. basically anything you need.
