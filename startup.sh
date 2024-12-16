@@ -21,10 +21,12 @@ sudo apt-get -y install   \
   docker-ce               \
   docker-ce-cli           \
   docker-compose-plugin   \
+  git                     \
   python3                 \
   python3-pip             \
   radare2                 \
-  preeny
+  preeny                  \
+  wget
 
 echo "Setting up Python..."
 pip3 install virtualenv --break-system-packages && \
@@ -40,9 +42,10 @@ pip3 install \
   z3-solver
 
 echo "Setting up pwndbg..."
+wget https://github.com/pwndbg/pwndbg/releases/download/2024.08.29/pwndbg_2024.08.29_amd64.deb                                           && \
 sudo chown -Rv _apt:root /var/cache/apt/archives/partial/ && \
 sudo chmod -Rv 700 /var/cache/apt/archives/partial/       && \
-sudo apt install ./Downloads/pwndbg_2024.08.29_amd64.deb
+sudo apt install ./pwndbg_2024.08.29_amd64.deb
 
 echo "Setting up GEF..."
 bash -c "$(wget https://gef.blah.cat/sh -O -)"
