@@ -8,7 +8,7 @@ The `challenges` directory contains packaged challenges ready to be run on an x6
 
 When you set up a new Coder instance, it will ask you a series of questions about provisioning a new instance. These should be mostly straightforward to answer. We suggest configuring your instance with two vCPUs to start with. You can always reconfigure your instance (instance Workspace -> the three-dot menu in the upper right hand corner to the right of the Favorite button -> Settings) to add more capacity if/as needed.
 
-In order to set up some basic dependencies, you can run the startup script in this repository. To do this, provide Coder with the following URL (use the `raw` githubusercontent.com location, not the html-embedded location from github.com):
+In order to set up some basic dependencies (and to pull the challenges from this repo and set them up), run the startup script in this repository. To do this, provide Coder with the following URL (use the `raw` githubusercontent.com location, not the html-embedded location from github.com):
 
 ```shell-script
 https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/startup.sh
