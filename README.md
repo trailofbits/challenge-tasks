@@ -17,6 +17,7 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 - Coder may randomly and without warning terminate and restart your instance; you will be able to see this in the uptime notification in the web UI (and in that your ssh to Coder has frozen).
 - Coder will not save your shell history by default, unless you have configured this yourself. Whenever you end the ssh connection to your Coder instance, you'll lose your shell history by default. 
 - Coder should allow passwordless `sudo` on your instance, so once you've ssh'd in you should be able to add, install, change, etc. basically anything you need.
+- Not all the output will necessarily be printed to your ssh console. For the full logs output and/or to see what happened when you need to debug, reference the Coder workspace logs. The ssh console lies (by omission!)
 
 ## Getting started with a new Coder instance
 
