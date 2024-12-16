@@ -23,7 +23,10 @@ bash -c "$(wget https://gef.blah.cat/sh -O -)"
 echo "Setting up Preeny..."
 git clone https://github.com/zardus/preeny.git
 cd preeny
-make
+make CDBG=-w
+
+echo "Setting up the challenges..."
+# this is todo
 
 echo "Cleaning up..."
 cd ~
