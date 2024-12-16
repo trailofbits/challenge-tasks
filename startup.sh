@@ -12,9 +12,9 @@ source venv/bin/activate
 pip3 install angr lief pwntools requests ropper urllib3 websockets z3-solver
 
 echo "Setting up pwndbg..."
-wget https://github.com/pwndbg/pwndbg/releases/download/2024.08.29/pwndbg_2024.08.29_amd64.deb
 sudo chown -Rv _apt:root /var/cache/apt/archives/partial/
 sudo chmod -Rv 700 /var/cache/apt/archives/partial/
+wget https://github.com/pwndbg/pwndbg/releases/download/2024.08.29/pwndbg_2024.08.29_amd64.deb
 sudo apt install ./pwndbg_2024.08.29_amd64.deb
 
 echo "Setting up GEF..."
@@ -24,3 +24,6 @@ echo "Setting up Preeny..."
 git clone https://github.com/zardus/preeny.git
 cd preeny
 make
+
+echo "Cleaning up..."
+rm pwndbg_2024.08.29_amd64.deb
