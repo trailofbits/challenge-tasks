@@ -6,7 +6,7 @@ The `challenges` directory contains packaged challenges ready to be run on an x6
 
 ## Host machine setup script
 
-When you set up a new Coder instance, it will ask you a series of questions about provisioning a new instance. In order to set up some basic dependencies, you can run the startup script in this repository. To do this, provide Coder with the following URL (you'll want the `raw` location, not the html-embedded location from github.com):
+When you set up a new Coder instance, it will ask you a series of questions about provisioning a new instance. In order to set up some basic dependencies, you can run the startup script in this repository. To do this, provide Coder with the following URL (use the `raw` githubusercontent.com location, not the html-embedded location from github.com):
 
 ```shell-script
 https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/startup.sh
@@ -14,20 +14,21 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 
 ### Potential Gotchas
 - Coder will take a snapshot of whatever you give it for the startup script when it creates your new instance. This means changes made in this repository will most likely not apply to existing instances unless they are deleted and re-provisioned.
-- Coder may randomly and without warning terminate and restart your instance; you will be able to see this in the uptime notification in the web UI (and in that your ssh to Coder has frozen).
+- Coder *may* randomly and without warning terminate and restart your instance; you will be able to see this in the uptime notification in the web UI. This may affect you if you are using your local terminal to ssh to your Coder instance.
 - Coder will not save your shell history by default, unless you have configured this yourself. Whenever you end the ssh connection to your Coder instance, you'll lose your shell history by default. 
 - Coder should allow passwordless `sudo` on your instance, so once you've ssh'd in you should be able to add, install, change, etc. basically anything you need.
-- Not all the output will necessarily be printed to your ssh console. For the full logs output and/or to see what happened when you need to debug, reference the Coder workspace logs. The ssh console lies (by omission!)
+- For the full logs output and/or to see what happened when you need to debug, prefer the saved Coder workspace logs over whatever Coder has printed to your terminal, which may omit some output.
 
 ## Getting started with a new Coder instance
 
-[Link to Coder Docs](https://s.cdr.dev/docs/workspaces/ssh/)
+[Link to Coder Docs](https://coder.com/docs/reference/cli)
 
-First, if you don't already have it, you'll need the Coder CLI binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
+If you don't already have it, and want to work in your local terminal, you'll need the `coder` binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
 ```shell-script
 brew install coder
 ```
-Then, whenever you create a new instance, you can run the Coder binary to fix up your local ssh shortnames:
+
+Then, whenever you create a new instance, you can run the Coder binary to set a local ssh shortname:
 ```shell-script
 coder config-ssh
 ```
@@ -37,5 +38,11 @@ Finally, you can ssh to your coder instance(s) using any of the names Coder adde
 ssh coder.<YOUR_INSTANCE_NAME_GOES_HERE>.main
 ```
 
+If that doesn't work for you for some reason, the following should be equivalent:
+```shell-script
+ssh <YOUR_CODER_USER_NAME_HERE>@coder.<YOUR_INSTANCE_NAME_GOES_HERE>
+```
+since your instance's hostname should be `coder.<YOUR_INSTANCE_NAME_GOES_HERE>`.
+
 ## Moving files to and fro
-`scp`, mysteriously enough, doesn't seem to want to play nicely with Coder configured with a startup script. Coder [officially supports the use of sFTP and rsync for file transfer](https://s.cdr.dev/docs/workspaces/ssh/).
+`scp`, `rsync`, and `sftp` are all supported by Coder. Periodic transfer (updating a local directory on either end, depending on your preferences) could also be configured with `cron` if you like.
