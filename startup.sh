@@ -6,16 +6,11 @@ set -eux
 sudo apt-get -y update && \
 sudo apt-get -y install   \
     build-essential       \
-    ca-certificates       \
-    curl                  \
-    git                   \
     libini-config-dev     \
     libseccomp-dev        \
     make                  \
-    python3               \
     python3-pip           \
-    radare2               \
-    wget
+    radare2
 
 echo "Setting up Docker..."
 sudo install -m 0755 -d /etc/apt/keyrings   && \
