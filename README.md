@@ -18,7 +18,7 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 - Coder will not save your shell history by default, unless you have configured this yourself. Whenever you end the ssh connection to your Coder instance, you'll lose your shell history by default. 
 - Coder should allow passwordless `sudo` on your instance, so once you've ssh'd in you should be able to add, install, change, etc. basically anything you need.
 
-## What kind of stuff can I do with Coder?
+## Getting started with a new Coder instance
 
 First, you'll need the Coder CLI binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
 ```shell-script
