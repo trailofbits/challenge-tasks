@@ -20,8 +20,10 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 - For the full logs output and/or to see what happened when you need to debug, prefer the saved Coder workspace logs over whatever Coder has printed to your terminal, which may omit some output.
 
 ## Getting started with a new Coder instance
-
-[Link to Coder Docs](https://coder.com/docs/reference/cli)
+- You can use either your local terminal, with the `coder` binary, or the webshell and web VSCode instances available from the page for your Coder workspace.
+- `scp`, `rsync`, and `sftp` are all Coder-supported methods of file transfer between your local machine, and your Coder instance, once you have ssh'd to your Coder instance at least once.
+- Periodic transfer (updating a local directory on either end, depending on your preferences) can be configured with `cron` if you'd like to autosave your work and/or aren't working in the webshell / web VSCode instance.
+- [Link to Coder Docs](https://coder.com/docs/reference/cli)
 
 If you don't already have it, and want to work in your local terminal, you'll need the `coder` binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
 ```shell-script
@@ -43,6 +45,3 @@ If that doesn't work for you for some reason, the following should be equivalent
 ssh <YOUR_CODER_USER_NAME_HERE>@coder.<YOUR_INSTANCE_NAME_GOES_HERE>
 ```
 since your instance's hostname should be `coder.<YOUR_INSTANCE_NAME_GOES_HERE>`.
-
-## Moving files to and fro
-`scp`, `rsync`, and `sftp` are all supported by Coder. Periodic transfer (updating a local directory on either end, depending on your preferences) could also be configured with `cron` if you like.
