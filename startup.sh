@@ -26,4 +26,5 @@ cd preeny
 make
 
 echo "Cleaning up..."
+cd ~
 rm pwndbg_2024.08.29_amd64.deb
