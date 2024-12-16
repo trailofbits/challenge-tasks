@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 
 ## Getting started with a new Coder instance
 
-First, you'll need the Coder CLI binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
+First, if you don't already have it, you'll need the Coder CLI binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain it from Brew on macOS:
 ```shell-script
 brew install coder
 ```
