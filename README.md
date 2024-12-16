@@ -11,3 +11,7 @@ When you set up a new Coder instance, it will ask you a series of questions abou
 ```shell-script
 https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/startup.sh
 ```
+
+### Potential Gotchas
+- Coder will take a snapshot of whatever you give it for the startup script when it creates your new instance. This means changes made in this repository will most likely not apply to existing instances unless they are deleted and re-provisioned.
+- Coder may randomly and without warning terminate and restart your instance; you will be able to see this in the uptime notification in the web UI (and in that your ssh to Coder has frozen).
