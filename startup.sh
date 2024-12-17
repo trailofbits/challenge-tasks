@@ -4,7 +4,7 @@
 set -eux
 
 sudo apt-get -y update
-sudo apt-get -y install build-essential libini-config-dev libseccomp-dev        make python3-pip python3-virtualenv radare2
+sudo apt-get -y install build-essential libini-config-dev libseccomp-dev        make python3-pip python3-virtualenv radare2 qemu-system
 
 echo "Setting up Python..."
 virtualenv -p /usr/bin/python3 venv
