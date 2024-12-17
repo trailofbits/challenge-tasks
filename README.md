@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/trailofbits/challenge-tasks/refs/heads/main/st
 ## Getting started with a new Coder instance
 - You can use either your local terminal, with the `coder` binary, or the webshell and web VSCode instances available from the page for your Coder workspace.
 - `scp`, `rsync`, and `sftp` are all Coder-supported methods of file transfer between your local machine, and your Coder instance, once you have ssh'd to your Coder instance at least once.
-- Periodic transfer (updating a local directory on either end, depending on your preferences) can be configured with `cron` if you'd like to autosave your work and/or aren't working in the webshell / web VSCode instance.
+- Periodic transfer (we suggest only setting this up from the instance to your local machine, should you choose to do this, since Coder shuts down any instances not in use and cron syncs from your local machine to a shut down instance will most likely fail) can be configured with `cron` if you'd like to autosave your work and/or aren't working in the webshell / web VSCode instance.
 - [Link to Coder Docs](https://coder.com/docs/reference/cli)
 
 If you don't already have it, and want to work in your local terminal, you'll need the `coder` binary. It will facilitate things like local instance creation and destruction, and ssh to instances. You can obtain [a slightly old version of the coder binary from Brew on macOS](https://formulae.brew.sh/formula/coder#default), or (if you like to live dangerously and blindly run shell scripts you haven't seen before) directly follow the [instructions](https://coder.com/docs/install/cli) in the Coder documentation.
