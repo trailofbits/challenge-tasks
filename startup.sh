@@ -21,9 +21,11 @@ echo "Setting up GEF..."
 bash -c "$(wget https://gef.blah.cat/sh -O -)"
 
 echo "Setting up Preeny..."
-git clone https://github.com/zardus/preeny.git
-cd preeny
-make CFLAGS=-w
+if [ ! -d "preeny" ] ; then
+    git clone https://github.com/zardus/preeny.git
+    cd preeny
+    make CFLAGS=-w
+fi
 
 echo "Cleaning up the working environment..."
 cd ~
