@@ -29,12 +29,14 @@ if [ ! -d "preeny" ] ; then
 fi
 
 echo "Getting the challenges..."
-git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git
-cd challenge-tasks
-git sparse-checkout init
-git sparse-checkout set challenges README.md
-git checkout main
-mv challenges ~/challenges
-mv README.md ~/README.md
-cd ~
-rm -rf challenge-tasks
+if [ ! -d "challengess" ]; then
+    git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git
+    cd challenge-tasks
+    git sparse-checkout init
+    git sparse-checkout set challenges README.md
+    git checkout main
+    mv challenges ~/challenges
+    mv README.md ~/README.md
+    cd ~
+    rm -rf challenge-tasks
+fi
