@@ -25,9 +25,14 @@ git clone https://github.com/zardus/preeny.git
 cd preeny
 make CFLAGS=-w
 
-echo "Setting up the challenges..."
-# this is todo
-
-echo "Cleaning up..."
+echo "Cleaning up the working environment..."
 cd ~
 rm pwndbg_2024.08.29_amd64.deb
+
+echo "Setting up the challenges..."
+git clone git@github.com:trailofbits/challenge-tasks.git
+cd challenge-tasks
+mv challenges ~/challenges
+mv README.md ~/README.md
+cd ~
+rm -rf challenge-tasks
