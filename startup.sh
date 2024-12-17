@@ -8,7 +8,8 @@ sudo apt-get -y install build-essential libini-config-dev libseccomp-dev        
 
 echo "Setting up Python..."
 virtualenv -p /usr/bin/python3 venv
-source venv/bin/activate
+echo "source venv/bin/activate" >> .bashrc
+source .bashrc
 pip3 install angr lief pwntools requests ropper urllib3 websockets z3-solver
 
 echo "Setting up pwndbg..."
