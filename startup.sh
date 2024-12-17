@@ -30,7 +30,7 @@ cd ~
 rm pwndbg_2024.08.29_amd64.deb
 
 echo "Setting up the challenges..."
-git clone git@github.com:trailofbits/challenge-tasks.git
+git clone https://github.com/trailofbits/challenge-tasks.git
 cd challenge-tasks
 mv challenges ~/challenges
 mv README.md ~/README.md
