@@ -6,7 +6,7 @@ set -eux
 sudo apt-get -y update
 sudo apt-get -y install build-essential libini-config-dev libseccomp-dev make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system radare2
 
-echo "Setting up Python..."
+echo "Setting up Python (virtualenv with dependencies will be located in your home directory)..."
 virtualenv -p /usr/bin/python3 venv
 source venv/bin/activate
 pip3 install angr lief pwntools requests ropper urllib3 websockets z3-solver
