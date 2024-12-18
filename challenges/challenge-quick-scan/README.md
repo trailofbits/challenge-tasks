@@ -12,3 +12,8 @@ Run the challenge start script `./run.sh`. This should start a containerised
 version of the challenge.py server on port 1337 on your local Coder instance.
 Connect to it using your method of choice at either 127.0.0.1:1337 or
 localhost:1337.
+
+## Cleaning up
+Most of the server based challenges run on local port 1337. Run the
+`cleanup.sh` in this directory to clear out disk space used by Docker, and to
+free up port 1337.

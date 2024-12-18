@@ -13,7 +13,7 @@ else
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
 	source venv/bin/activate
-	pip3 install angr lief pwntools requests ropper urllib3 websockets z3-solver
+	pip3 install angr jwcrypto lief pwntools requests ropper urllib3 websockets z3-solver
 
 	echo "Setting up pwndbg..."
 	sudo chown -Rv _apt:root /var/cache/apt/archives/partial/
