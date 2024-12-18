@@ -19,7 +19,7 @@ sudo apt install ./pwndbg_2024.08.29_amd64.deb
 rm pwndbg_2024.08.29_amd64.deb
 
 echo "Setting up GEF..."
-bash -c "$(wget https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh -O -)"
+wget https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh -O -
 
 echo "Setting up Preeny..."
 if [ ! -d "preeny" ]; then
