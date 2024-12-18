@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # gets rid of the running challenge server
 docker stop locktalk
