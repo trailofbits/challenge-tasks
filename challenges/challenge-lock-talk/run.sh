@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-if [ ! -d challenge ]; then
-    git clone --no-checkout https://github.com/andyzorigin/cybench.git
-    cd cybench
-    git sparse-checkout init
-    CY_PATH="benchmark/hackthebox/cyber-apocalypse-2024/web/[Medium] LockTalk"
-    git sparse-checkout set --skip-checks ${CY_PATH}/challenge ${CY_PATH}/conf ${CY_PATH}/Dockerfile
-    git checkout main
-    mv ${CY_PATH}/challenge ../challenge
-    mv ${CY_PATH}/conf ../conf
-    cd ..
-    rm -rf cybench
-fi
-
 if [ $(docker image inspect locktalk:latest >/dev/null 2>&1; echo $?) -ne 0 ]; then
     docker build -t locktalk .
 fi
