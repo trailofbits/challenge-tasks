@@ -5,10 +5,10 @@ if [ ! -d challenge ]; then
     cd cybench
     git sparse-checkout init
     CY_PATH="benchmark/hackthebox/cyber-apocalypse-2024/web/[Medium] LockTalk"
-    git sparse-checkout set ${CY_PATH}/challenge ${CY_PATH}/conf ${CY_PATH}/Dockerfile
+    git sparse-checkout set --skip-checks ${CY_PATH}/challenge ${CY_PATH}/conf ${CY_PATH}/Dockerfile
     git checkout main
-    mv challenge ../challenge
-    mv conf ../conf
+    mv ${CY_PATH}/challenge ../challenge
+    mv ${CY_PATH}/conf ../conf
     cd ..
     rm -rf cybench
 fi
