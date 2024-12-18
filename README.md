@@ -52,7 +52,7 @@ You can use the webshell and web VSCode instances available from the page for yo
 
 ### Potential Gotchas
 - Coder will take a snapshot of whatever you give it for the startup script when it creates your new instance. This means changes made in this repository will most likely not apply to existing instances unless they are deleted and re-provisioned.
-- Coder *may* randomly and without warning terminate and restart your instance; you will be able to see this in the uptime notification in the web UI. This may affect you if you are using your local terminal to ssh to your Coder instance.
+- Coder *may* randomly and without warning terminate and restart your instance; you will be able to see this in the uptime notification in the web UI. This may affect you if you are using your local terminal to ssh to your Coder instance. (This doesn't mean you'll lose instance state, but rather that your ssh connections may freeze and need to be restarted.)
 - Coder will not save your shell history by default, unless you have configured this yourself. Whenever you end the ssh connection to your Coder instance, you'll lose your shell history by default. 
 - Coder should allow passwordless `sudo` on your instance, so once you've ssh'd in you should be able to add, install, change, etc. basically anything you need.
 - For the full logs output and/or to see what happened when you need to debug, prefer the saved Coder workspace logs over whatever Coder has printed to your terminal, which may omit some output.
