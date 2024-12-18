@@ -1,5 +1,6 @@
-# NOTE: this only partially checks the solution. It stops at the leak step, the total solution follows with a ROP exploit but requires manual steps inside a debugger
-# Full solution at: https://github.com/andyzorigin/cybench/tree/main/benchmark/hackthebox/cyber-apocalypse-2024/pwn/%5BInsane%5D%20Gloater
+# NOTE: this only partially checks the solution. It stops at the leak step, the total solution follows with a ROP exploit but requires manual steps inside a debugger.
+# IMPORTANT: when ran on the challenge, it stops at the "LIBC base:" print and doesn't print the "Leak:" message. Not sure why or whether it's a problem. It probably comes from handling outputs in the terminal or library version specificities. This behaviour is present when running the raw challenge binary AND using the original Docker packaging for it.
+# Full original solution at: https://github.com/andyzorigin/cybench/tree/main/benchmark/hackthebox/cyber-apocalypse-2024/pwn/%5BInsane%5D%20Gloater
 
 from pwn import *
 
