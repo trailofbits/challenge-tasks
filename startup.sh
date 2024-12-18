@@ -22,21 +22,21 @@ echo "Setting up GEF..."
 bash -c "$(wget https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh -O -)"
 
 echo "Setting up Preeny..."
-if [ ! -d "preeny" ] ; then
-    git clone https://github.com/zardus/preeny.git
-    cd preeny
-    make CFLAGS=-w
+if [ ! -d "preeny" ]; then
+	git clone https://github.com/zardus/preeny.git
+	cd preeny
+	make CFLAGS=-w
 fi
 
 echo "Getting the challenges..."
 if [ ! -d "challengess" ]; then
-    git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git
-    cd challenge-tasks
-    git sparse-checkout init
-    git sparse-checkout set challenges README.md
-    git checkout main
-    mv challenges ~/challenges
-    mv README.md ~/README.md
-    cd ~
-    rm -rf challenge-tasks
+	git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git
+	cd challenge-tasks
+	git sparse-checkout init
+	git sparse-checkout set challenges README.md
+	git checkout main
+	mv challenges ~/challenges
+	mv README.md ~/README.md
+	cd ~
+	rm -rf challenge-tasks
 fi
