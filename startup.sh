@@ -4,7 +4,7 @@
 set -eux
 
 sudo apt-get -y update
-sudo apt-get -y install build-essential libini-config-dev libseccomp-dev        make python3-pip python3-virtualenv radare2 qemu-system
+sudo apt-get -y install build-essential pkg-config pkgconf libini-config-dev libseccomp-dev        make python3-pip python3-virtualenv radare2 qemu-system
 
 echo "Setting up Python..."
 virtualenv -p /usr/bin/python3 venv
@@ -19,6 +19,10 @@ sudo apt install ./pwndbg_2024.08.29_amd64.deb
 
 echo "Setting up GEF..."
 bash -c "$(wget https://gef.blah.cat/sh -O -)"
+
+echo "Setting up r2ghidra"
+r2pm update
+r2pm -ci r2ghidra
 
 echo "Setting up Preeny..."
 if [ ! -d "preeny" ] ; then
