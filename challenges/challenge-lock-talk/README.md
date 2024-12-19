@@ -17,12 +17,7 @@ them to unravel the mysteries surrounding LockTalk and choose between
 succumbing to despair or standing resilient against the encroaching darkness.
 
 ## Goal
-Chain HAProxy
-[CVE-2023-45539](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45539) and
-python\_jwt [CVE-2022-39227](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39227)
-to obtain the flag.
-
-See also: https://www.cvedetails.com/cve/CVE-2023-45539/, https://www.cvedetails.com/cve/CVE-2022-39227/
+Obtain the flag.
 
 You can verify the flag you found by comparing with the expected flag in
 `flag.txt` under the [solutions directory](https://github.com/trailofbits/challenge-tasks/tree/main/solutions) on GitHub.

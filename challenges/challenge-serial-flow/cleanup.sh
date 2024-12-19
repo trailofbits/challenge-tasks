@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # gets rid of the running challenge server
-docker stop locktalk
-docker rm locktalk
+docker stop serialflow
 
 # gets rid of the cached docker image
-docker image rm locktalk
+docker image rm serialflow
