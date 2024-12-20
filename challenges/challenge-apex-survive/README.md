@@ -22,7 +22,9 @@ You can verify the flag you found by comparing with the expected flag in
 Run the challenge start script `./run.sh`. This should start the vulnerable
 application in an Alpine Docker container locally on your Coder instance.
 Connect to it using your method of choice at either 127.0.0.1:1337 or
-localhost:1337.
+localhost:1337. You will want to work with the server UI, so either use VNC to
+connect to your Coder instance, or pull this directory to work with on a machine
+on which you have a GUI.
 
 ## Cleaning up
 Most of the server based challenges run on local port 1337. Run the
