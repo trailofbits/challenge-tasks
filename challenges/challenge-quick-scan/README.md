@@ -1,5 +1,10 @@
 # Quick Scan
 
+[![Generic badge](https://img.shields.io/badge/Type-Reversing-yellow.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Level-Medium-orange.svg)](https://shields.io/)
+
+*Original author: clubby789 for HTB Cyber Apocalypse 2024*
+
 ## Goal
 Connect to the server on port 1337, receive some data, and send back the correct
 answer to the server as a hexadecimal string in order to get the flag.

@@ -8,7 +8,7 @@ if [ -d challenges ]; then
 	exit
 else
 	sudo apt-get -y update
-	sudo apt-get -y install build-essential gdb httpie libini-config-dev libseccomp-dev make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system radare2
+	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system radare2
 
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
@@ -24,6 +24,13 @@ else
 
 	echo "Setting up GEF..."
 	bash -c "$(wget https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh -O -)"
+
+        echo "Setting up radare2 + r2ghidra"
+        git clone https://github.com/radareorg/radare2
+        radare2/sys/install.sh
+        rm -rf radare2
+        /usr/local/bin/r2pm update
+        /usr/local/bin/r2pm -ci r2ghidra
 
 	echo "Setting up Preeny..."
 	git clone https://github.com/zardus/preeny.git

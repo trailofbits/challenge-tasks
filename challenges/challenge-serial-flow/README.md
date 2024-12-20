@@ -1,5 +1,8 @@
 # Lock Talk
 
+[![Generic badge](https://img.shields.io/badge/Type-Web-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Level-Medium-orange.svg)](https://shields.io/)
+
 *Original author: Lean for HTB Cyber Apocalypse 2024*
 
 ## Introduction
