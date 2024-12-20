@@ -8,7 +8,7 @@ if [ -d challenges ]; then
 	exit
 else
 	sudo apt-get -y update
-	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system x11vnc
+	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep tigervnc-standalone-server tigervnc-viewer x11-xserver-utils
 
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
@@ -25,13 +25,13 @@ else
 	echo "Setting up GEF..."
 	bash -c "$(wget https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh -O -)"
 
-echo "Setting up radare2 + r2ghidra"
-curl -Ls https://github.com/radareorg/radare2/releases/download/5.9.8/radare2-5.9.8.tar.xz | tar xJv
-./radare2-5.9.8/sys/install.sh
-if [ -e /usr/local/bin/r2pm ]; then
-		/usr/local/bin/r2pm -Uci r2ghidra
-fi
-rm -rf radare2-5.9.8 radare2-5.9.8.tar.xz
+	echo "Setting up radare2 + r2ghidra"
+	curl -Ls https://github.com/radareorg/radare2/releases/download/5.9.8/radare2-5.9.8.tar.xz | tar xJv
+	./radare2-5.9.8/sys/install.sh
+	if [ -e /usr/local/bin/r2pm ]; then
+			/usr/local/bin/r2pm -Uci r2ghidra
+	fi
+	rm -rf radare2-5.9.8 radare2-5.9.8.tar.xz
 
 	echo "Setting up Preeny..."
 	git clone https://github.com/zardus/preeny.git
