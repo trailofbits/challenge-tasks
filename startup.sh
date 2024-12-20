@@ -31,7 +31,7 @@ curl -Ls https://github.com/radareorg/radare2/releases/download/5.9.8/radare2-5.
 if [ -e /usr/local/bin/r2pm ]; then
 		/usr/local/bin/r2pm -Uci r2ghidra
 fi
-rm -rf radare2-5.9.8
+rm -rf radare2-5.9.8 && radare2-5.9.8.tar.xz
 
 	echo "Setting up Preeny..."
 	git clone https://github.com/zardus/preeny.git
