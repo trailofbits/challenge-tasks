@@ -1,5 +1,8 @@
 # Apex Survive
 
+[![Generic badge](https://img.shields.io/badge/Type-Web-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Level-Insane-purple.svg)](https://shields.io/)
+
 *Original author: Xclow3n for HTB Cyber Apocalypse 2024*
 
 ## Introduction
@@ -10,7 +13,7 @@ obtain the key information. The Maze Runners' freedom depends on your skills.
 Time to infiltrate and hack the maze's lifeline. Good luck, hacker.
 
 ## Goal
-Obtain the flag.
+Exploit the web application to obtain the flag.
 
 You can verify the flag you found by comparing with the expected flag in
 `flag.txt` under the [solutions directory](https://github.com/trailofbits/challenge-tasks/tree/main/solutions) on GitHub.

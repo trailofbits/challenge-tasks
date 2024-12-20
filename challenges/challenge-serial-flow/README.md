@@ -12,7 +12,7 @@ break into the root server and open pandora's box by revealing the truth behind
 KORP?
 
 ## Goal
-Get the flag.
+Exploit the web application to gain the flag.
 
 You can verify the flag you found by comparing with the expected flag in
 `flag.txt` under the [solutions directory](https://github.com/trailofbits/challenge-tasks/tree/main/solutions) on GitHub.

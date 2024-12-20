@@ -20,7 +20,7 @@ them to unravel the mysteries surrounding LockTalk and choose between
 succumbing to despair or standing resilient against the encroaching darkness.
 
 ## Goal
-Obtain the flag.
+Exploit the web application to get the flag.
 
 You can verify the flag you found by comparing with the expected flag in
 `flag.txt` under the [solutions directory](https://github.com/trailofbits/challenge-tasks/tree/main/solutions) on GitHub.
