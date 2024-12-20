@@ -27,10 +27,12 @@ else
 
         echo "Setting up radare2 + r2ghidra"
         git clone https://github.com/radareorg/radare2
-        radare2/sys/install.sh
+        ./radare2/sys/install.sh
+        if [ -e /usr/local/bin/r2pm ]; then
+            /usr/local/bin/r2pm update
+            /usr/local/bin/r2pm -ci r2ghidra
+        fi
         rm -rf radare2
-        /usr/local/bin/r2pm update
-        /usr/local/bin/r2pm -ci r2ghidra
 
 	echo "Setting up Preeny..."
 	git clone https://github.com/zardus/preeny.git
