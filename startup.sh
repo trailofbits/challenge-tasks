@@ -25,7 +25,7 @@ else
 	echo "Setting up GEF..."
 	bash -c "$(wget https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh -O -)"
 
-	echo "Setting up radare2 + r2ghidra"
+	echo "Setting up radare2 + r2ghidra..."
 	curl -Ls https://github.com/radareorg/radare2/releases/download/5.9.8/radare2-5.9.8.tar.xz | tar xJv
 	./radare2-5.9.8/sys/install.sh
 	if [ -e /usr/local/bin/r2pm ]; then
