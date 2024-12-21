@@ -38,10 +38,6 @@ else
 	cd preeny
 	make CFLAGS=-w
 
-	echo "Set up X server since we havent used it before..."
-	tigervncserver -xstartup /usr/bin/xterm
-	tigervncserver -kill :1
-
 	echo "Getting the challenges..."
 	git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git
 	cd challenge-tasks
