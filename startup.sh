@@ -8,7 +8,7 @@ if [ -d challenges ]; then
 	exit
 else
 	sudo apt-get -y update
-	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils xterm x11vnc
+	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep tigervnc-standalone-server x11-xserver-utils xorf xterm x11vnc
 
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
@@ -37,6 +37,10 @@ else
 	git clone https://github.com/zardus/preeny.git
 	cd preeny
 	make CFLAGS=-w
+
+	echo "Set up X server since we havent used it before..."
+	tigervncserver -xstartup /usr/bin/xterm
+	tigervncserver -kill :1
 
 	echo "Getting the challenges..."
 	git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git

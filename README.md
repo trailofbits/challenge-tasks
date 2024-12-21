@@ -40,14 +40,22 @@ ssh <YOUR_CODER_USER_NAME_HERE>@coder.<YOUR_INSTANCE_NAME_GOES_HERE>
 since your instance's hostname should be `coder.<YOUR_INSTANCE_NAME_GOES_HERE>`.
 
 #### File transfer
-`scp`, `rsync`, and `sftp` are all Coder-supported methods of file transfer between your local machine, and your Coder instance, once you have ssh'd to your Coder instance at least once.
+`scp`, `rsync`, and `sftp` are all Coder-supported methods of file transfer
+between your local machine, and your Coder instance, once you have ssh'd to
+your Coder instance at least once.
 
 #### GUI (VNC) access
 
 *Better ideas/implementations are welcome and appreciated, but we're using x11vnc over ssh for now.*
 
-If you are running macOS, [vnc-viewer](https://formulae.brew.sh/cask/vnc-viewer#default) is a free VNC client that is available from Brew. On Linux, there are of course many options. You will need GUI access for several of the web challenges. The startup script sets you up with x11, lightdm, and tigervnc server, but doesn't enable vnc by default since you should set a unique password for that.
+If you are running macOS, [vnc-viewer](https://formulae.brew.sh/cask/vnc-viewer#default)
+is a free VNC client that is available from Brew. On Linux, there are of course
+many options. You will need GUI access for several of the web challenges. The
+startup script sets your instance up with x11, lightdm, and a choice of tigervnc
+or x11vnc, but doesn't enable vnc by default since you should set a unique password
+for that.
 
+##### X11VNC
 The following directions are adapted from the [Arch wiki](https://wiki.archlinux.org/title/X11vnc).
 
 On your instance either over ssh or through the webshell, [set a VNC password](https://manpages.debian.org/buster/x11vnc/x11vnc.1.en.html#:~:text=x11vnc%20exits%20immediately.-,%2Dstorepasswd%20pass%20file,-Store%20password%20pass) for your instance. I generated and stored one in my password manager, then set it locally in `/etc/x11vnc.pwd` (this file name is important since we'll reference it in the systemd configuration).
@@ -78,7 +86,7 @@ Once you have this configuration locally on your Coder instance, enable and star
   $ sudo systemctl status x11vnc
 ```
 
-From your own machine, you should now be able to make the ssh tunnel to connect to the x11vnc server on your Coder instance:
+From your own machine, you should now be able to make the ssh tunnel to connect to a new X session via the x11vnc server on your Coder instance:
 
 ```shell-script
   ssh -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -localhost -create -display :0'
