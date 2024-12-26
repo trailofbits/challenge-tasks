@@ -1,0 +1,17 @@
+
+services:
+  servercontainer:
+    image: 'llmctf/2023f-web-triathlon_or_sprint-server'
+    build:
+      context: ./server
+    restart: always
+    networks:
+      net:
+        ipv4_address: 172.19.0.2
+networks:
+  net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.19.0.0/16
+        gateway: 172.19.0.1
