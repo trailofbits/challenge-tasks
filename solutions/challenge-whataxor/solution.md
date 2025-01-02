@@ -1,0 +1,13 @@
+## Solution
+
+This is the first "real" reversing task. You need to use a disassembler or decompiler to view the code. See readme for some suggestions.
+
+When you open the file, you should be able to tell that your input is getting mutated and then compared to a nonsense array.
+
+The mutation happening to your input is a single-byte repeating XOR with a key of `0xAA`. If you apply that same transformation on the array, you get the flag (because XOR is symetric).
+
+### Step-by-step solution
+
+- Decompile the main function from the `whataxor` binary
+- Identify the array containing the obfuscated flag and extract its contents
+- XOR the entire array with 0xAA to obtain the flag

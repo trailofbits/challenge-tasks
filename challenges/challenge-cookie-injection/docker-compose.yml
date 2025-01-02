@@ -1,0 +1,5 @@
+services:
+  cookie-injection:
+    image: 'llmctf/2023q-web-cookie_injection'
+    ports:
+    - "5800:5800"

@@ -1,0 +1,5 @@
+services:
+  smug-dino:
+    image: 'llmctf/2023q-web-smug_dino'
+    ports:
+    - "3009:3009"
