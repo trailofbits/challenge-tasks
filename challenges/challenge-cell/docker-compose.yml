@@ -1,0 +1,5 @@
+services:
+  web:
+    image: llmctf/2023f-rev-cell:latest
+    ports:
+      - 12312:31137
