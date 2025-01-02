@@ -8,7 +8,7 @@ if [ -d challenges ]; then
 	exit
 else
 	sudo apt-get -y update
-	sudo apt-get -y install build-essential pkg-config gdb gdm3 httpie libini-config-dev libseccomp-dev make netcat-traditional net-tools protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils xorg xterm x11vnc
+	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional net-tools protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils x11vnc xorg xterm xvfb
 
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
@@ -54,7 +54,8 @@ else
 	sudo systemctl restart ssh.service
 	sudo systemctl enable x11vnc
 	sudo systemctl start x11vnc
-	sudo systemctl start gdm
+	sudo systemctl start lightdm
+	export XAUTHORITY=$HOME/.Xauthority
 
 	echo "Cleaning up..."
 	cd ~
