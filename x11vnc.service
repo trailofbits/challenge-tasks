@@ -1,0 +1,13 @@
+[Unit]
+Description=x11vnc VNC Server
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -forever -loop -noxdamage -repeat -nopw -create -display :0 -env XAUTHORITY=~/.Xauthority
+ExecStop=/usr/bin/killall x11vnc
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
