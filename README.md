@@ -47,7 +47,7 @@ your Coder instance at least once.
 ### Access from your browser
 You can use the webshell and web VSCode instances available from the page for your Coder workspace. Sometimes the webshell is a little more stable than ssh.
 
-### GUI (VNC) access
+### GUI access
 You will need GUI access for the web challenges. For now, this can be obtained using X tunnelling over ssh from your local command line (better ideas welcome). The startup script sets your instance up with x11,
 lightdm, net-tools, and x11vnc, so you should be good to start a vnc connection over an ssh tunnel to your VM instance.
 
@@ -75,7 +75,7 @@ If x11vnc is happy, `status` should show you somehting like this:
 
 Then, if you run `xauth list`, you should see at least one entry in the output for display `:0`.
 
-Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`. If not, either export the environment variables to these values on your instance, or pass them through in the tunnelled ssh command.
+Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`.
 
 ```shell-script
   $ echo $DISPLAY
@@ -84,7 +84,7 @@ Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As we
   /home/<YOURUSERNAMEHERE>/.Xauthority
 ```
 
-#### ssh tunneling / port forwarding (Clientside, on your laptop)
+#### ssh tunneling
 On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
 
 On your laptop, *if* you are running MacOS, XQuartz should set `$DISPLAY` for you. On Mac, XQuartz will enable you to interact with the X11 environment you're going to forward from your Coder instance over ssh. (If your client/laptop OS is Linux, ensure you have your X server set up properly to receive the session you're about to forward from your Coder instance).
@@ -108,18 +108,17 @@ You *may* also need to modify your local ssh_config file (likely it's `/etc/ssh/
 
  which should tell you something like this (meaning the x11vnc server is running on port 5900, and the display is `:0`):
  ```
-    The VNC desktop is:      coder-YOURUSERNAME-YOURINSTANCE:0
+    The VNC desktop is: coder-YOURUSERNAME-YOURINSTANCE:0
     PORT=5900
  ```
 
- Now we just need to map that port to our clientside localhost over ssh, and connect something to it. You can also forward commands over the ssh tunnel, such as xlogo. Before you try forwarding `x11vnc`, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working.
+ At this point you should be able to start graphical applications while ssh'd into your remote instance on the remote instance's command line, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
 
-For example:
+#### port forwarding
+ Now we just need to map that port (5900) where our x11vnc is running to our clientside localhost over ssh, and connect something to it. Before you try connecting a vnc viewer, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working. For example:
 ```shell-script
   $ ssh -v -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> xeyes
 ```
-
-At this point you should be able to run graphical applications from the command line, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
 
 Then (also, replacing `-X` with `-Y` if you want the session to persist - you own both the Coder instance and your laptop so it should be fine):
 ```shell-script
