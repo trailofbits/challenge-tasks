@@ -42,7 +42,7 @@ else
 	git clone --no-checkout https://github.com/trailofbits/challenge-tasks.git
 	cd challenge-tasks
 	git sparse-checkout init
-	git sparse-checkout set challenges README.md 70-cloudimg-sshd-settings.conf x11vnc.service
+	git sparse-checkout set challenges README.md 70-cloudimg-sshd-settings.conf x11vnc.service lightdm.conf
 	git checkout main
 	mv challenges ~/challenges
 	mv README.md ~/README.md
@@ -51,14 +51,16 @@ else
 	sudo chown lightdm:lightdm /var/lib/lightdm-data
 	sudo mv 70-cloudimg-sshd-settings.conf /etc/ssh/sshd_config.d/70-cloudimg-settings.conf
 	sudo mv x11vnc.service /lib/systemd/system/x11vnc.service
+	sudo mv lightdm.conf /etc/lightdm/lightdm.conf
 	sudo systemctl daemon-reload
+	sudo systemctl start colord.service
+	sudo systemctl restart dbus.service
 	sudo systemctl restart ssh.service
 	sudo systemctl enable x11vnc
 	sudo systemctl start x11vnc
-	sudo systemctl start colord.service
-	sudo systemctl restart dbus.service
 	sudo systemctl start lightdm
 	export XAUTHORITY=$HOME/.Xauthority
+	xhost +
 
 	echo "Cleaning up..."
 	cd ~
