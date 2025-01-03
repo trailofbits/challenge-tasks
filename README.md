@@ -45,54 +45,70 @@ between your local machine, and your Coder instance, once you have ssh'd to
 your Coder instance at least once.
 
 #### GUI (VNC) access
+You will need GUI access for the web challenges. The startup script sets your instance up with x11,
+lightdm, net-tools, and x11vnc, so you should be good to start a vnc connection over an ssh tunnel to your VM instance.
 
-*Better ideas/implementations are welcome and appreciated, but we're using x11vnc over ssh for now.*
-
-If you are running macOS, [vnc-viewer](https://formulae.brew.sh/cask/vnc-viewer#default)
-is a free VNC client that is available from Brew. On Linux, there are of course
-many options. You will need GUI access for several of the web challenges. The
-startup script sets your instance up with x11, lightdm, and a choice of tigervnc
-or x11vnc, but doesn't enable vnc by default since you should set a unique password
-for that.
-
-##### X11VNC
-The following directions are adapted from the [Arch wiki](https://wiki.archlinux.org/title/X11vnc).
-
-On your instance either over ssh or through the webshell, [set a VNC password](https://manpages.debian.org/buster/x11vnc/x11vnc.1.en.html#:~:text=x11vnc%20exits%20immediately.-,%2Dstorepasswd%20pass%20file,-Store%20password%20pass) for your instance. I generated and stored one in my password manager, then set it locally in `/etc/x11vnc.pwd` (this file name is important since we'll reference it in the systemd configuration).
-
-Next, create [a systemd unit for x11vnc](https://manpages.debian.org/buster/x11vnc/x11vnc.1.en.html), I suggest in `/lib/systemd/system/x11vnc.service`. The following unit file contents aren't perfect, but it's a starting point (suggestions welcome):
+##### .Xauthority file
+You'll need an X authority file in your VM's home folder. To obtain one, use the `-X` ssh option when sshing into your Coder VM. You should only need to do this one time (you can log out again and then proceed with the rest of the instructions):
 ```shell-script
-[Unit]
-Description=x11vnc VNC Server
-After=multi-user.target
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/x11vnc -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pwd -rfbport 5900 -shared -o /var/log/x11vnc.log -create -display :0 -env XAUTHORITY=~/.Xauthority
-ExecStop=/usr/bin/killall x11vnc
-Restart=on-failure
-RestartSec=2
-
-[Install]
-WantedBy=multi-user.target
+  $ ssh -X <YOUR_CODER_USER_NAME_HERE>@coder.<YOUR_INSTANCE_NAME_GOES_HERE>
 ```
 
-Once you have this configuration locally on your Coder instance, enable and start x11vnc, and check status (if it's not `active (running)`, you may need to troubleshoot beyond the scope of this document):
+##### x11vnc (Serverside, on your VM image)
+Check the status of the VNC server we've configured for you to make sure it's alive, before creating a new session to it over an ssh tunnel:
 
 ```shell-script
-  $ sudo systemctl daemon-reload
-  $ sudo systemctl enable x11vnc
-  $ sudo systemctl start x11vnc
   $ sudo systemctl status x11vnc
 ```
 
-From your own machine, you should now be able to make the ssh tunnel to connect to a new X session via the x11vnc server on your Coder instance:
+If x11vnc is happy, `status` should show you somehting like this:
 
-```shell-script
-  ssh -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -localhost -create -display :0'
+```
+...systemd[1]: Started x11vnc.service - x11vnc VNC Server.
+...x11vnc[44001]:  --- x11vnc loop: 1 ---
+...x11vnc[44001]:  --- x11vnc loop: waiting for: 44002
+...x11vnc[44002]: 02/01/2025 17:56:13 x11vnc version: 0.9.16 lastmod: 2019-01-05  pid: 44002
 ```
 
-Then, just use your VNC client of choice (I'm using VNC Viewer in this example) to connect to localhost:5900 and provide the VNC password you set on your Coder instance when it prompts you!
+Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`.
+
+###### MacOS (Clientside)
+On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
+
+On your laptop, *if* you are running MacOS, XQuartz should set `$DISPLAY` for you. On Mac, XQuartz will enable you to interact with the X11 environment you're going to forward from your Coder instance over ssh. (If your client/laptop OS is Linux, ensure you have your X server set up properly to receive the session you're about to forward from your Coder instance).
+
+On Mac, in your clientside terminal, before the first time you ssh forward X11:
+```shell-script
+  $ defaults write org.x.X11 enable_test_extensions -boolean true
+```
+
+You *may* also need to modify your local ssh_config file (likely it's `/etc/ssh/ssh_config`) and uncomment or add the following (this is the most drastic option and can likely be narrowed down to just your instance host):
+```shell-script
+ Host *
+   ForwardX11 yes
+```
+
+Before you try forwarding `x11vnc`, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working.
+
+For example:
+```shell-script
+  $ ssh -v -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> xeyes
+```
+
+Then (also, replacing -X with -Y if needed):
+```shell-script
+  $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -display :0 -create -nopw -noipv6 -xkb -remap DEAD'
+```
+
+To check that ssh is listening on port 5900 locally, run:
+```
+  $ sudo lsof -i -P | grep LISTEN | grep :5900
+```
+
+Assuming all is well, you should now be able to connect to your forwarded X session and interact with it.
+
+###### Actually connecting
+You made it! Now in your VNC client (on the clientside machine), just connect to `127.0.0.1:5900` in your VNC client of choice.
 
 ### Access from your browser
 You can use the webshell and web VSCode instances available from the page for your Coder workspace. Sometimes the webshell is a little more stable than ssh.
