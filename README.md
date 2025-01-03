@@ -70,7 +70,18 @@ If x11vnc is happy, `status` should show you somehting like this:
 ...x11vnc[44002]: 02/01/2025 17:56:13 x11vnc version: 0.9.16 lastmod: 2019-01-05  pid: 44002
 ```
 
+Then, if you run `xauth list`, you should see at least one entry in the output for display `:0`.
+
 Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`. If not, either export the environment variables to these values on your instance, or pass them through in the tunnelled ssh command.
+
+```shell-script
+  $ echo $DISPLAY
+  :0.0
+  $ echo $XAUTHORITY
+  /home/<YOURUSERNAMEHERE>/.Xauthority
+```
+
+At this point you should be able to run graphical applications, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
 
 ##### ssh tunneling / port forwarding (Clientside, on your laptop)
 On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
