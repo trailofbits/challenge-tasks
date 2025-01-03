@@ -8,7 +8,7 @@ if [ -d challenges ]; then
 	exit
 else
 	sudo apt-get -y update
-	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional net-tools protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils x11vnc xorg xserver-xephyr xterm xvfb
+	sudo apt-get -y install build-essential desktop-base pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm lightdm-gtk-greeter make netcat-traditional net-tools protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils x11vnc xorg xserver-xephyr xterm xvfb
 
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
