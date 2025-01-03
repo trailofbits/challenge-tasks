@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x11vnc -forever -loop -repeat -nopw -localhost -create -display :0 -auth $HOME/.Xauthority
+ExecStart=/usr/bin/x11vnc -forever -loop -repeat -nopw -httpport 5900 -create -display :0 -auth $HOME/.Xauthority
 ExecStop=/usr/bin/killall x11vnc
 Restart=on-failure
 RestartSec=2
