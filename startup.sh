@@ -8,7 +8,7 @@ if [ -d challenges ]; then
 	exit
 else
 	sudo apt-get -y update
-	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional net-tools protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils x11vnc xorg xterm xvfb
+	sudo apt-get -y install build-essential pkg-config gdb httpie libini-config-dev libseccomp-dev lightdm make netcat-traditional net-tools protobuf-compiler python3-pip python3-virtualenv qemu-system ripgrep x11-xserver-utils x11vnc xorg xserver-xephyr xterm xvfb
 
 	echo "Setting up Python (virtualenv with dependencies will be in your home directory)..."
 	virtualenv -p /usr/bin/python3 venv
@@ -48,12 +48,15 @@ else
 	mv README.md ~/README.md
 
 	echo "Setting up X11 forwarding..."
+	sudo chown lightdm:lightdm /var/lib/lightdm-data
 	sudo mv 70-cloudimg-sshd-settings.conf /etc/ssh/sshd_config.d/70-cloudimg-settings.conf
 	sudo mv x11vnc.service /lib/systemd/system/x11vnc.service
 	sudo systemctl daemon-reload
 	sudo systemctl restart ssh.service
 	sudo systemctl enable x11vnc
 	sudo systemctl start x11vnc
+	sudo systemctl start colord.service
+	sudo systemctl restart dbus.service
 	sudo systemctl start lightdm
 	export XAUTHORITY=$HOME/.Xauthority
 
