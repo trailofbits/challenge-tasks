@@ -44,17 +44,20 @@ since your instance's hostname should be `coder.<YOUR_INSTANCE_NAME_GOES_HERE>`.
 between your local machine, and your Coder instance, once you have ssh'd to
 your Coder instance at least once.
 
-#### GUI (VNC) access
-You will need GUI access for the web challenges. The startup script sets your instance up with x11,
+### Access from your browser
+You can use the webshell and web VSCode instances available from the page for your Coder workspace. Sometimes the webshell is a little more stable than ssh.
+
+### GUI (VNC) access
+You will need GUI access for the web challenges. For now, this can be obtained using X tunnelling over ssh from your local command line (better ideas welcome). The startup script sets your instance up with x11,
 lightdm, net-tools, and x11vnc, so you should be good to start a vnc connection over an ssh tunnel to your VM instance.
 
-##### .Xauthority file
+#### .Xauthority file
 You'll need an X authority file in your VM's home folder. To obtain one, use the `-X` ssh option when sshing into your Coder VM. You should only need to do this one time (you can log out again and then proceed with the rest of the instructions):
 ```shell-script
   $ ssh -X coder.<YOUR_INSTANCE_NAME_GOES_HERE>
 ```
 
-##### x11vnc (Serverside, on your VM image)
+#### x11vnc (Serverside, on your VM image)
 Check the status of the VNC server we've configured for you to make sure it's alive, before creating a new session to it over an ssh tunnel:
 
 ```shell-script
@@ -81,7 +84,7 @@ Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As we
   /home/<YOURUSERNAMEHERE>/.Xauthority
 ```
 
-##### ssh tunneling / port forwarding (Clientside, on your laptop)
+#### ssh tunneling / port forwarding (Clientside, on your laptop)
 On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
 
 On your laptop, *if* you are running MacOS, XQuartz should set `$DISPLAY` for you. On Mac, XQuartz will enable you to interact with the X11 environment you're going to forward from your Coder instance over ssh. (If your client/laptop OS is Linux, ensure you have your X server set up properly to receive the session you're about to forward from your Coder instance).
@@ -129,9 +132,6 @@ On your mac, to check that your ssh tunnel is listening on port 5900 locally, ru
 ```
 
 Assuming all is well, you should now be able to connect to your forwarded X session and interact with it. In your VNC client (on the clientside machine), connect to `127.0.0.1:5900`. Assuming *that* goes well, you should now have a VNC session through which you can interact with the desktop of your Coder VM.
-
-### Access from your browser
-You can use the webshell and web VSCode instances available from the page for your Coder workspace. Sometimes the webshell is a little more stable than ssh.
 
 ### Other
 - Periodic transfer (we suggest only setting this up from the instance to your local machine, should you choose to do this, since Coder shuts down any instances not in use and cron syncs from your local machine to a shut down instance will most likely fail) can be configured with `cron` if you'd like to autosave your work and/or aren't working in the webshell / web VSCode instance.
