@@ -112,7 +112,7 @@ You *may* also need to modify your local ssh_config file (likely it's `/etc/ssh/
     PORT=5900
  ```
 
- At this point you should be able to start graphical applications while ssh'd into your remote instance on the remote instance's command line, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
+ At this point you should be able to start graphical applications while `ssh -X`'d into your remote instance on the remote instance's command line, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
 
 #### port forwarding
  Now we just need to map that port (5900) where our x11vnc is running to our clientside localhost over ssh, and connect something to it. Before you try connecting a vnc viewer, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working. For example:
