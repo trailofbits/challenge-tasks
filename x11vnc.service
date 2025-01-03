@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x11vnc -display :0 -create -forever -loop -repeat -nopw -httpport 5900 -xkb -auth /var/run/lightdm/root/:0
+ExecStart=/usr/bin/x11vnc -display :0 -create -forever -loop -repeat -nopw -httpport 5900 -xkb -auth /var/run/lightdm/root/:0 -geometry 1920x1080 -scale 1920x1080
 ExecStop=/usr/bin/killall x11vnc
 Restart=on-failure
 RestartSec=2

@@ -51,7 +51,7 @@ lightdm, net-tools, and x11vnc, so you should be good to start a vnc connection 
 ##### .Xauthority file
 You'll need an X authority file in your VM's home folder. To obtain one, use the `-X` ssh option when sshing into your Coder VM. You should only need to do this one time (you can log out again and then proceed with the rest of the instructions):
 ```shell-script
-  $ ssh -X <YOUR_CODER_USER_NAME_HERE>@coder.<YOUR_INSTANCE_NAME_GOES_HERE>
+  $ ssh -X coder.<YOUR_INSTANCE_NAME_GOES_HERE>
 ```
 
 ##### x11vnc (Serverside, on your VM image)
@@ -68,11 +68,6 @@ If x11vnc is happy, `status` should show you somehting like this:
 ...x11vnc[44001]:  --- x11vnc loop: 1 ---
 ...x11vnc[44001]:  --- x11vnc loop: waiting for: 44002
 ...x11vnc[44002]: 02/01/2025 17:56:13 x11vnc version: 0.9.16 lastmod: 2019-01-05  pid: 44002
-```
-
-You *may* need to run the following:
-```shell-script
-	xhost +
 ```
 
 Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`. If not, either export the environment variables to these values on your instance, or pass them through in the tunnelled ssh command.
@@ -99,7 +94,7 @@ You *may* also need to modify your local ssh_config file (likely it's `/etc/ssh/
   $ sudo systemctl status x11vnc.service
  ```
 
- which should tell you something like this:
+ which should tell you something like this (meaning the x11vnc server is running on port 5900, and the display is `:0`):
  ```
     The VNC desktop is:      coder-YOURUSERNAME-YOURINSTANCE:0
     PORT=5900
@@ -112,9 +107,9 @@ For example:
   $ ssh -v -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> xeyes
 ```
 
-Then (also, replacing -X with -Y if needed):
+Then (also, replacing `-X` with `-Y` if you want the session to persist - you own both the Coder instance and your laptop so it should be fine):
 ```shell-script
-  $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME>
+  $ ssh -X -t -L 5900:127.0.0.1:5900 coder.<YOURINSTANCENAME>
 ```
 
 On your mac, to check that your ssh tunnel is listening on port 5900 locally, run:
@@ -122,7 +117,7 @@ On your mac, to check that your ssh tunnel is listening on port 5900 locally, ru
   $ sudo lsof -i -P | grep LISTEN | grep :5900
 ```
 
-Assuming all is well, you should now be able to connect to your forwarded X session and interact with it. In your VNC client (on the clientside machine), connect to `127.0.0.1:5900`.
+Assuming all is well, you should now be able to connect to your forwarded X session and interact with it. In your VNC client (on the clientside machine), connect to `127.0.0.1:5900`. Assuming *that* goes well, you should now have a VNC session through which you can interact with the desktop of your Coder VM.
 
 ### Access from your browser
 You can use the webshell and web VSCode instances available from the page for your Coder workspace. Sometimes the webshell is a little more stable than ssh.
