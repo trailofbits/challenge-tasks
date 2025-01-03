@@ -81,8 +81,6 @@ Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As we
   /home/<YOURUSERNAMEHERE>/.Xauthority
 ```
 
-At this point you should be able to run graphical applications, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
-
 ##### ssh tunneling / port forwarding (Clientside, on your laptop)
 On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
 
@@ -117,6 +115,8 @@ For example:
 ```shell-script
   $ ssh -v -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> xeyes
 ```
+
+At this point you should be able to run graphical applications from the command line, and they should open on your local desktop. If you want to go a step further and have a whole entire Ubuntu desktop, read on.
 
 Then (also, replacing `-X` with `-Y` if you want the session to persist - you own both the Coder instance and your laptop so it should be fine):
 ```shell-script
