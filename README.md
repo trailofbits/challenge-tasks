@@ -97,7 +97,7 @@ For example:
 
 Then (also, replacing -X with -Y if needed):
 ```shell-script
-  $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -display :0 -create -nopw -noipv6 -xkb -remap DEAD'
+  $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -display :0 -create -forever -geometry 1920x1080 -scale 1920x1080 -nopw -noipv6 -xkb -remap DEAD'
 ```
 
 On your mac, to check that your ssh tunnel is listening on port 5900 locally, run:
