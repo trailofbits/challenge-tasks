@@ -88,7 +88,19 @@ You *may* also need to modify your local ssh_config file (likely it's `/etc/ssh/
    ForwardX11 yes
 ```
 
-Before you try forwarding `x11vnc`, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working.
+ On the server (VM instance) side, x11vnc should be running on port 5900. You can check this on your instance with
+
+ ```shell-script
+  $ sudo systemctl status x11vnc.service
+ ```
+
+ which should tell you something like this:
+ ```
+    The VNC desktop is:      coder-YOURUSERNAME-YOURINSTANCE:0
+    PORT=5900
+ ```
+
+ Now we just need to map that port to our clientside localhost over ssh, and connect something to it. You can also forward commands over the ssh tunnel, such as xlogo. Before you try forwarding `x11vnc`, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working.
 
 For example:
 ```shell-script
@@ -97,7 +109,7 @@ For example:
 
 Then (also, replacing -X with -Y if needed):
 ```shell-script
-  $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -display :0 -create -forever -geometry 1920x1080 -scale 1920x1080 -nopw -noipv6 -xkb -remap DEAD'
+  $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME>
 ```
 
 On your mac, to check that your ssh tunnel is listening on port 5900 locally, run:
