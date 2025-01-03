@@ -70,9 +70,9 @@ If x11vnc is happy, `status` should show you somehting like this:
 ...x11vnc[44002]: 02/01/2025 17:56:13 x11vnc version: 0.9.16 lastmod: 2019-01-05  pid: 44002
 ```
 
-Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`.
+Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`. If not, either export the environment variables to these values on your instance, or pass them through in the tunnelled ssh command.
 
-###### MacOS (Clientside)
+##### ssh tunneling / port forwarding (Clientside, on your laptop)
 On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
 
 On your laptop, *if* you are running MacOS, XQuartz should set `$DISPLAY` for you. On Mac, XQuartz will enable you to interact with the X11 environment you're going to forward from your Coder instance over ssh. (If your client/laptop OS is Linux, ensure you have your X server set up properly to receive the session you're about to forward from your Coder instance).
@@ -100,15 +100,12 @@ Then (also, replacing -X with -Y if needed):
   $ ssh -X -t -L 5900:127.0.0.1:5900 <YOURUSERNAME>@coder.<YOURINSTANCENAME> 'x11vnc -display :0 -create -nopw -noipv6 -xkb -remap DEAD'
 ```
 
-To check that ssh is listening on port 5900 locally, run:
+On your mac, to check that your ssh tunnel is listening on port 5900 locally, run:
 ```
   $ sudo lsof -i -P | grep LISTEN | grep :5900
 ```
 
-Assuming all is well, you should now be able to connect to your forwarded X session and interact with it.
-
-###### Actually connecting
-You made it! Now in your VNC client (on the clientside machine), just connect to `127.0.0.1:5900` in your VNC client of choice.
+Assuming all is well, you should now be able to connect to your forwarded X session and interact with it. In your VNC client (on the clientside machine), connect to `127.0.0.1:5900`.
 
 ### Access from your browser
 You can use the webshell and web VSCode instances available from the page for your Coder workspace. Sometimes the webshell is a little more stable than ssh.
