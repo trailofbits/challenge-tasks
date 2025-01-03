@@ -53,9 +53,9 @@ else
 	sudo mv x11vnc.service /lib/systemd/system/x11vnc.service
 	sudo mv lightdm.conf /etc/lightdm/lightdm.conf
 	sudo systemctl daemon-reload
-	sudo systemctl start colord.service
-	sudo systemctl restart dbus.service
-	sudo systemctl restart ssh.service
+	sudo systemctl start colord
+	sudo systemctl restart dbus
+	sudo systemctl restart ssh
 	sudo systemctl enable x11vnc
 	sudo systemctl start x11vnc
 	sudo systemctl start lightdm
