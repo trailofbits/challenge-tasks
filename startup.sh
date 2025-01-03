@@ -54,11 +54,10 @@ else
 	sudo mv lightdm.conf /etc/lightdm/lightdm.conf
 	sudo systemctl daemon-reload
 	sudo systemctl restart ssh
+	sudo systemctl restart lightdm
 	sudo systemctl enable x11vnc
 	sudo systemctl start x11vnc
-	sudo systemctl start lightdm
 	export XAUTHORITY=$HOME/.Xauthority
-	xhost +
 
 	echo "Cleaning up..."
 	cd ~

@@ -70,6 +70,11 @@ If x11vnc is happy, `status` should show you somehting like this:
 ...x11vnc[44002]: 02/01/2025 17:56:13 x11vnc version: 0.9.16 lastmod: 2019-01-05  pid: 44002
 ```
 
+You *may* need to run the following:
+```shell-script
+	xhost +
+```
+
 Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As well, `XAUTHORITY` should be `/home/YOURUSERNAME/.Xauthority`. If not, either export the environment variables to these values on your instance, or pass them through in the tunnelled ssh command.
 
 ##### ssh tunneling / port forwarding (Clientside, on your laptop)
