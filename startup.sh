@@ -57,7 +57,6 @@ else
 	sudo systemctl restart lightdm
 	sudo systemctl enable x11vnc
 	sudo systemctl start x11vnc
-	export XAUTHORITY=$HOME/.Xauthority
 
 	echo "Cleaning up..."
 	cd ~

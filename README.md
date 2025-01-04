@@ -126,6 +126,7 @@ Then (also, replacing `-X` with `-Y` if you want the session to persist - you ow
 ```shell-script
   $ ssh -C -X -t -L 5900:127.0.0.1:5900 coder.<YOURINSTANCENAME>
 ```
+Allow the command to return you a prompt on the remote VM instance before attempting to connect with your VNC viewer. Sometimes Coder hangs ssh connections randomly.
 
 On your mac, to check that your ssh tunnel is listening on port 5900 locally, run:
 ```
