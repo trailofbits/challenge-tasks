@@ -85,7 +85,7 @@ Now, check the environment variable `DISPLAY`, it should be set to `:0.0`. As we
 ```
 
 #### ssh tunneling
-On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM. You will also need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
+On Mac, you'll need an X server such as [XQuartz](https://formulae.brew.sh/cask/xquartz#default) to be able to view and interact with the X11 environment we're about to forward from our Coder VM.
 
 On your laptop, *if* you are running MacOS, XQuartz should set `$DISPLAY` for you. On Mac, XQuartz will enable you to interact with the X11 environment of your Coder instance over ssh. (If your client/laptop OS is Linux, ensure you have your X server set up properly to receive the session/apps you're about to tunnel over ssh from your Coder instance).
 
@@ -116,6 +116,8 @@ Warning: this section is under construction.
     The VNC desktop is: coder-YOURUSERNAME-YOURINSTANCE:0
     PORT=5900
  ```
+
+You will need a VNC client, e.g., [Tiger VNC Viewer](https://formulae.brew.sh/cask/tigervnc-viewer#default) and [VNC Viewer](https://formulae.brew.sh/cask/vnc-viewer#default) are available from Brew on macOS or from your package manager of choice on Linux, and should work fine, or just use your favourite.
 
  Now we just need to map that port (5900) where our x11vnc is running to our clientside localhost over ssh, and connect something to it. Before you try connecting a vnc viewer, try forwarding `xeyes` or `xlogo` to make sure the serverside X server is set up properly, and to make sure your clientside ssh configuration is working. For example:
 ```shell-script
