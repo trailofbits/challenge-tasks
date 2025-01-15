@@ -1,0 +1,13 @@
+[Unit]
+Description=x11vnc VNC Server
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -display :0 -create -forever -loop -repeat -nopw -httpport 5900 -xkb -auth /var/run/lightdm/root/:0 -localhost
+ExecStop=/usr/bin/killall x11vnc
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

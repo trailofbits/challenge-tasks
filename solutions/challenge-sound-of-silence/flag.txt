@@ -1,0 +1,1 @@
+../../challenges/challenge-sound-of-silence/flag.txt
